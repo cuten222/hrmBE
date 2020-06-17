@@ -10,6 +10,7 @@ import hrm.common.entity.AbstractEntity;
 @Entity
 @Table(name = "role")
 public class Role extends AbstractEntity{
-
+	
 	private String roleName;
+	private String description;
 }

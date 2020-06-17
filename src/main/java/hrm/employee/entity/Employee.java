@@ -1,15 +1,19 @@
 package hrm.employee.entity;
 
+import java.util.Collection;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import hrm.common.entity.AbstractEntity;
 import hrm.department.entity.Department;
+import hrm.skill.entity.Emp_Skill;
 import hrm.user.entity.User;
 
 @Entity
@@ -23,6 +27,9 @@ public class Employee extends AbstractEntity{
 //	@ManyToOne
 //	@JoinColumn(name = "departmentID")
 //	private Department dept;
+	
+	@OneToMany(mappedBy = "emp", cascade = CascadeType.ALL)
+	private Collection<Emp_Skill> empSkill;
 
     @Column(name = "empFirstName")
     private String empFirstName;

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import hrm.employee.entity.Employee;
@@ -31,6 +32,17 @@ public class EmployeeController {
 		try {
 			List<Employee> empList = empService.getEmps();
 			return new ResponseEntity<>(empList, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping(value = "/listLimit")
+	public ResponseEntity<List<Employee>> getLimitEmp(@RequestParam("start") int start,
+													@RequestParam("limit") int limit){
+		try {
+			List<Employee> listLimitEmp = empService.getLimitEmps(start, limit);
+			return new ResponseEntity<>(listLimitEmp, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}

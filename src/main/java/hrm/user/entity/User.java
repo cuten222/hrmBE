@@ -16,6 +16,7 @@ import hrm.role.entity.Role;
 public class User extends AbstractEntity{
 
 	private String userName;
+	
 	private String password;
 	
 	@ManyToOne

@@ -41,5 +41,11 @@ public class EmployeeServiceImplement implements EmployeeService{
 		empRepo.delete(emp);
 	}
 
+	@Override
+	public List<Employee> getLimitEmps(int start, int limit) {
+		List<Employee> listEmpLimit = empRepo.listEmpLimit(start, limit);
+		return listEmpLimit;
+	}
+
 
 }
