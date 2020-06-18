@@ -7,13 +7,16 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import hrm.common.entity.AbstractEntity;
 import hrm.department.entity.Department;
-import hrm.skill.entity.Emp_Skill;
+import hrm.skill.entity.Skill;
+import hrm.skill.entity.Skill_Emp;
 import hrm.user.entity.User;
 
 @Entity
@@ -24,36 +27,27 @@ public class Employee extends AbstractEntity{
 	@JoinColumn( name = "userID")
 	private User user;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "departmentID")
-//	private Department dept;
-	
 	@OneToMany(mappedBy = "emp", cascade = CascadeType.ALL)
-	private Collection<Emp_Skill> empSkill;
+	private Collection<Skill_Emp> skillEmp;
 
-    @Column(name = "empFirstName")
     private String empFirstName;
 
-    @Column(name = "empLastName")
     private String empLastName;
 
-    @Column(name = "empGender")
     private String empGender;
 
-    @Column(name = "empPhoneNumber")
     private String empPhoneNumber;
 
-    @Column(name = "empAddress")
     private String empAddress;
 
-    @Column(name = "empEmail")
     private String empEmail;
 
-    @Column(name = "empBirthDay")
     private Date empBirthDay;
 
-    @Column(name = "empStartDay")
     private Date empStartDay;
+    
+//	@ManyToMany(mappedBy = "emp")
+//	private Collection<Skill> skill;
 
 	public String getEmpFirstName() {
 		return empFirstName;
@@ -119,7 +113,20 @@ public class Employee extends AbstractEntity{
 		this.empStartDay = empStartDay;
 	}
 
-	
-    
-    
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+//
+//	public Collection<Skill_Emp> getSkillEmp() {
+//		return skillEmp;
+//	}
+//
+//	public void setSkillEmp(Collection<Skill_Emp> skillEmp) {
+//		this.skillEmp = skillEmp;
+//	}
+//    
 }

@@ -7,4 +7,5 @@ import hrm.department.entity.Department;
 
 public interface DeptPaginationService {
 	Page<Department> listAllDepts(PageRequest pageRequest);
+	
 }
