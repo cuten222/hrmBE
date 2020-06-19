@@ -41,6 +41,12 @@ public class DepartmentServiceImpl implements DepartmentService{
 		deptRepo.delete(dept);
 	}
 
+	@Override
+	public List<Department> getLimitDept(int start, int pageSize) {
+		List<Department> deptList = deptRepo.listDeptLimit(start, pageSize);
+		return deptList;
+	}
+
 	
 	
 	

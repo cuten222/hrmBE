@@ -120,11 +120,11 @@ public class Employee extends AbstractEntity{
 	public void setUser(User user) {
 		this.user = user;
 	}
-//
-//	public Collection<Skill_Emp> getSkillEmp() {
-//		return skillEmp;
-//	}
-//
+
+	public Collection<Skill_Emp> getSkillEmp() {
+		return skillEmp;
+	}
+
 //	public void setSkillEmp(Collection<Skill_Emp> skillEmp) {
 //		this.skillEmp = skillEmp;
 //	}

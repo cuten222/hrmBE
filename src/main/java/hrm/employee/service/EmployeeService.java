@@ -7,6 +7,7 @@ import hrm.employee.entity.Employee;
 public interface EmployeeService{
 	List<Employee> getEmps();
 	
+	
 	List<Employee> getLimitEmps(int start, int limit);
 	
 	Employee GetEmpByID(int empID);

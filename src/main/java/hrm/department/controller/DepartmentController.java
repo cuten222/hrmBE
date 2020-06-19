@@ -21,9 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import hrm.department.entity.Department;
-import hrm.department.entity.DeptResponse;
 import hrm.department.service.DepartmentService;
-import hrm.department.service.DeptPaginationService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -32,17 +30,24 @@ public class DepartmentController {
 	@Autowired
 	private DepartmentService deptService;
 
-	@Autowired
-	private DeptPaginationService deptPaginationService;
-
 	@GetMapping(value = "/list")
-	public Page<DeptResponse> listDept(@RequestParam(name = "page", defaultValue = "0") int page,
-									@RequestParam(name = "size", defaultValue = "5") int size) {
-		PageRequest pageRequest = PageRequest.of(page, size);
-		Page<Department> pageResult = deptPaginationService.listAllDepts(pageRequest);
-		List<DeptResponse> deptList = pageResult.stream().map(DeptResponse::new).collect(Collectors.toList());
-		
-		return new PageImpl<>(deptList, pageRequest, pageResult.getTotalElements());
+	public ResponseEntity<List<Department>> getDepts(){
+		try {
+			List<Department> listDept = deptService.getAllDept();
+			return new ResponseEntity<>(listDept, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping(value = "/listLimit")
+	public ResponseEntity<List<Department>> getLimitDept(@RequestParam("start") int start, @RequestParam("pageSize") int pageSize){
+		try {
+			List<Department> listDept = deptService.getLimitDept(start, pageSize);
+			return new ResponseEntity<>(listDept, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 	@GetMapping(value = "/get/{id}")
