@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import hrm.skill.entity.Skill_Emp;
 import hrm.skill.repository.Skill_EmpRepository;
 import hrm.skill.service.Skill_EmpService;
 
+@Service
 public class Skill_EmpServiceImplement implements Skill_EmpService{
 	
 	private Skill_EmpRepository repo;
@@ -16,18 +18,6 @@ public class Skill_EmpServiceImplement implements Skill_EmpService{
 	@Autowired
 	public Skill_EmpServiceImplement(Skill_EmpRepository repo) {
 		this.repo = repo;
-	}
-
-	@Override
-	public List<Skill_Emp> listLimitSkill(int start, int pageSize) {
-		List<Skill_Emp> list = repo.listLimitSkill(start, pageSize);
-		return null;
-	}
-	
-	@Override
-	public List<Skill_Emp> listSkill() {
-		List<Skill_Emp> list = repo.listAllSkill();
-		return list;
 	}
 
 	@Override
@@ -40,14 +30,6 @@ public class Skill_EmpServiceImplement implements Skill_EmpService{
 	public Skill_Emp createSkill(Skill_Emp skillEmp) {
 		Skill_Emp skill = repo.save(skillEmp);
 		return skill;
-	}
-
-	@Override
-	public Skill_Emp updateSkill(int id, Skill_Emp skillEmpDetail) {
-		Skill_Emp skill = findSkillByID(id);
-		skill.setSkill(skillEmpDetail.getSkill());
-		skill.setLevel(skillEmpDetail.getLevel());
-		return repo.save(skill);
 	}
 
 	@Override

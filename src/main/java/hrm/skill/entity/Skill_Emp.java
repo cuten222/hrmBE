@@ -14,6 +14,7 @@ import hrm.employee.entity.Employee;
 @Entity
 @Table(name="skill_emp")
 public class Skill_Emp {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -23,20 +24,12 @@ public class Skill_Emp {
 	private boolean delFlag = false;
 	
 	@ManyToOne
-	@PrimaryKeyJoinColumn(name= "id")
+	@PrimaryKeyJoinColumn(name= "skill_id")
 	private Skill skill;
 	
 	@ManyToOne
-	@PrimaryKeyJoinColumn(name ="id")
+	@PrimaryKeyJoinColumn(name ="emp_id")
 	private Employee emp;
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	public int getLevel() {
 		return level;

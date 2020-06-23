@@ -8,15 +8,10 @@ import hrm.skill.entity.Skill_Emp;
 
 @Service
 public interface Skill_EmpService {
-	List<Skill_Emp> listSkill();
-	
-	List<Skill_Emp> listLimitSkill(int start, int pageSize);
 	
 	Skill_Emp findSkillByID(int id);
 	
 	Skill_Emp createSkill(Skill_Emp skillEmp);
-	
-	Skill_Emp updateSkill(int id, Skill_Emp skillEmp);
 	
 	Skill_Emp deleteSkill(int id);
 }

@@ -25,6 +25,11 @@ public class SkillServiceImpl implements SkillService{
 		return skillList;
 	}
 
+	@Override
+	public List<Skill> getLimit(int start, int pageSize) {
+		List<Skill> skillList = repo.getLimit(start, pageSize);
+		return skillList;
+	}
 
 	@Override
 	public Skill getByID(int skillID) {
@@ -51,5 +56,6 @@ public class SkillServiceImpl implements SkillService{
 		skill.setDelFlag(true);
 		return repo.save(skill);
 	}
+
 
 }

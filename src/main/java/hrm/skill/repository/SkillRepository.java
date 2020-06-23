@@ -10,4 +10,7 @@ import hrm.skill.entity.Skill;
 public interface SkillRepository extends JpaRepository<Skill, Integer>{
 	@Query(value = "Select * from Skill where del_flag = 0", nativeQuery = true)
 	public List<Skill> getAll();
+	
+	@Query(value = "Select * from Skill where del_flag = 0 limit ?,?", nativeQuery = true)
+	public List<Skill> getLimit(int start, int pageSize);
 }

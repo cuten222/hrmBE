@@ -1,4 +1,4 @@
-package hrm.skill.controller;
+package hrm.project.controller;
 
 import java.util.List;
 
@@ -16,70 +16,67 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import hrm.skill.entity.Skill;
-import hrm.skill.service.SkillService;
+import hrm.project.entity.Project;
+import hrm.project.entity.ReqProject;
+import hrm.project.service.ProjectService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/skill")
-public class SkillController {
+@RequestMapping("/project")
+public class ProjectController {
 	
 	@Autowired
-	private SkillService service;
+	public ProjectService service;
 	
 	@GetMapping("/list")
-	public ResponseEntity<List<Skill>> skillGets(){
+	public ResponseEntity<List<Project>> listProject(){
 		try {
-			List<Skill> skillList = service.getAll();
-			return new ResponseEntity<>(skillList, HttpStatus.OK);
+			List<Project> list = service.listAll();
+			return new ResponseEntity<>(list, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
 	@GetMapping("/listLimit")
-	public ResponseEntity<List<Skill>> GetsLimit(@PathParam(value = "start") int start, @PathParam(value = "pageSize")int pageSize){
+	public ResponseEntity<List<Project>> listLimitProject(@PathParam(value = "start") int start, @PathParam(value = "pageSize")int pageSize){
 		try {
-			List<Skill> skillList = service.getLimit(start, pageSize);
-			return new ResponseEntity<>(skillList, HttpStatus.OK);
+			return new ResponseEntity<>(service.listLimit(start, pageSize), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
 	@GetMapping("/get/{id}")
-	public ResponseEntity<Skill> skillGet(@PathVariable(value = "id") int id){
+	public ResponseEntity<Project> getProjectByID(@PathVariable(value = "id") int id) {
 		try {
-			return new ResponseEntity<>(service.getByID(id), HttpStatus.OK);
+			Project project = service.findByID(id);
+			return new ResponseEntity<>(project, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	@PostMapping("/create")
-	public ResponseEntity<Skill> createSkill(@RequestBody Skill skill) {
+	public ResponseEntity<Project> createProject(@RequestBody ReqProject request){
 		try {
-			return new ResponseEntity<>(service.create(skill), HttpStatus.OK);
-		} catch (Exception e) {
+			return new ResponseEntity<>(service.create(request), HttpStatus.OK);
+		} catch (Exception e) {	
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
 	@PutMapping("/update/{id}")
-	public ResponseEntity<Skill> updateSkill(@PathVariable(value = "id") int id, @RequestBody Skill skill){
+	public ResponseEntity<Project> updateProject(@PathVariable(value = "id") int id, @RequestBody ReqProject request){
 		try {
-			return new ResponseEntity<>(service.update(skill, id), HttpStatus.OK);
+			return new ResponseEntity<>(service.update(request, id), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
 	@PutMapping("/delete/{id}")
-	public ResponseEntity<Skill> deleteSkill(@PathVariable(value = "id") int id){
+	public ResponseEntity<Project> deleteProject(@PathVariable(value = "id") int id){
 		try {
 			return new ResponseEntity<>(service.delete(id), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
 }

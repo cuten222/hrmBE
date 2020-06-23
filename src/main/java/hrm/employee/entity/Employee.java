@@ -15,6 +15,7 @@ import javax.persistence.Table;
 
 import hrm.common.entity.AbstractEntity;
 import hrm.department.entity.Department;
+import hrm.project.entity.Project_Employee;
 import hrm.skill.entity.Skill;
 import hrm.skill.entity.Skill_Emp;
 import hrm.user.entity.User;
@@ -29,6 +30,9 @@ public class Employee extends AbstractEntity{
 	
 	@OneToMany(mappedBy = "emp", cascade = CascadeType.ALL)
 	private Collection<Skill_Emp> skillEmp;
+	
+	@OneToMany(mappedBy = "emp", cascade = CascadeType.ALL)
+	private Collection<Project_Employee> projectEmp ;
 
     private String empFirstName;
 

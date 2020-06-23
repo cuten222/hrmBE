@@ -1,4 +1,4 @@
-package hrm.skill.controller;
+package hrm.project.controller;
 
 import java.util.List;
 
@@ -16,40 +16,30 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import hrm.skill.entity.Skill_Emp;
-import hrm.skill.service.Skill_EmpService;
+import hrm.project.entity.Project_Employee;
+import hrm.project.service.Project_EmpService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/skill_emp")
-public class Skill_EmpController {
+@RequestMapping("/projectEmp")
+public class Project_EmpController {
 	
 	@Autowired
-	public Skill_EmpService service;
-	
-	@GetMapping("/get/{id}")
-	public ResponseEntity<Skill_Emp> findByID(@PathVariable(value = "id") int id){
-		try {
-			Skill_Emp skill = service.findSkillByID(id);
-			return new ResponseEntity<>(skill, HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
+	public Project_EmpService service;
 	
 	@PostMapping("/create")
-	public ResponseEntity<Skill_Emp> create(@RequestBody Skill_Emp skill){
+	public ResponseEntity<Project_Employee> create(@RequestBody Project_Employee projectEmp){
 		try {
-			return new ResponseEntity<>(service.createSkill(skill), HttpStatus.OK);
+			return new ResponseEntity<>(service.create(projectEmp), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
-	@PutMapping("/delete/{id}")
-	public ResponseEntity<Skill_Emp> delete(@PathVariable(value = "id")int id){
+	@PutMapping("/delete/{empID}")
+	public ResponseEntity<Project_Employee> delete(@PathVariable("empID") int empID){
 		try {
-			return new ResponseEntity<>(service.deleteSkill(id), HttpStatus.OK);
+			return new ResponseEntity<>(service.delete(empID), HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
