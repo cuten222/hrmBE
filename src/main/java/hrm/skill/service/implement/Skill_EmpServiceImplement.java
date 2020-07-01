@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import hrm.skill.entity.Skill_Emp;
 import hrm.skill.repository.Skill_EmpRepository;
 import hrm.skill.service.Skill_EmpService;
@@ -37,6 +36,12 @@ public class Skill_EmpServiceImplement implements Skill_EmpService{
 		Skill_Emp skill = findSkillByID(id);
 		skill.setDelFlag(true);
 		return repo.save(skill);
+	}
+
+	@Override
+	public List<Skill_Emp> findAll() {
+		List<Skill_Emp> list = repo.listAllSkill();
+		return list;
 	}
 
 

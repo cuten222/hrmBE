@@ -27,6 +27,16 @@ public class Skill_EmpController {
 	@Autowired
 	public Skill_EmpService service;
 	
+	@GetMapping("/list")
+	public ResponseEntity<List<Skill_Emp>> findAll(){
+		try {
+			List<Skill_Emp> list = service.findAll();
+			return new ResponseEntity<>(list, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 	@GetMapping("/get/{id}")
 	public ResponseEntity<Skill_Emp> findByID(@PathVariable(value = "id") int id){
 		try {
